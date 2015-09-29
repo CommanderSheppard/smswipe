@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">smswipe</string>
+
+    <string name="password">Your password</string>
+    <string name="hint">Type password here</string>
+    <string name="button">Setup</string>
+    <string name="action_settings">Settings</string>
+</resources>
