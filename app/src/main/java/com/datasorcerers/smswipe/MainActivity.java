@@ -1,5 +1,6 @@
 package com.datasorcerers.smswipe;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -12,6 +13,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+    public static final String APP_PREFERENCES = "mysettings";
+    private SharedPreferences mSettings;
+    private String keyWord;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +25,20 @@ public class MainActivity extends AppCompatActivity {
         final TextView hint = (TextView) findViewById(R.id.textView);
         final EditText password = (EditText) findViewById(R.id.editText);
         final Button setup = (Button) findViewById(R.id.button);
+
+        setup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if ("".equals(hint.getText()) || hint.getText() == null) {
+                    // TODO: change to new alert
+                    System.out.println("void");
+                } else {
+                    saveKeyWord(hint.getText().toString());
+                    System.out.println(hint.getText().toString());
+                }
+            }
+        });
+
 
         // скрывает надпись "Ваш пароль"
         hint.setVisibility(View.INVISIBLE);
@@ -67,4 +85,9 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void saveKeyWord(String newKeyWord){
+        SharedPreferences.Editor editor = mSettings.edit();
+        editor.putString(keyWord, newKeyWord);
+        editor.apply();
+    }
 }
